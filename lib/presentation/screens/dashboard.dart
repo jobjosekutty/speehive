@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:speehive/core/app_color.dart';
+import 'package:speehive/presentation/screens/login.dart';
 
 
 import '../../di/get_it.dart';
@@ -43,7 +47,37 @@ class Dashboard extends StatelessWidget {
                                             fontSize: 16,
                                             color: Colors.white
                                             
-                                          ),),centerTitle: true,),
+                                          ),),centerTitle: true,actions: [
+                                              PopupMenuButton<String>(
+                                                icon: Icon(Icons.logout,color: Colors.white,),
+            onSelected: (value) async{
+              // Handle menu item selection
+              if (value == 'Logout') {
+                  final SharedPreferences preferences = await SharedPreferences.getInstance();
+           preferences.setString("token","").then((value) {
+            log("value is ${value}");
+                  Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>  LoginScreen()),
+                          );
+
+             
+           },);
+
+                print("Logout selected");
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return {'Logout'}.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
+            },
+          )
+                                          ],),
         body: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(

@@ -1,8 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:speehive/core/app_color.dart';
+import "package:http/http.dart" as http;
+import 'package:speehive/core/app_url.dart';
 
-class DetailsScreen extends StatelessWidget {
+class DetailsScreen extends StatefulWidget {
    const DetailsScreen({super.key, this.projectno, this.portname, this.type, this.vesselname, this.customername,});
 
   final String? projectno;
@@ -10,8 +15,28 @@ class DetailsScreen extends StatelessWidget {
   final String? type;
   final String? vesselname;
   final String? customername;
-  
 
+  @override
+  State<DetailsScreen> createState() => _DetailsScreenState();
+}
+
+class _DetailsScreenState extends State<DetailsScreen> {
+  @override
+  void initState() {
+    //fetch();
+    super.initState();
+  }
+
+  // fetch() async {
+
+
+  //    final SharedPreferences preferences = await SharedPreferences.getInstance();
+  //      var auth = preferences.getString("token");
+    
+      
+  //     final response = await http.get(Uri.parse(AppUrl.New),headers: {'Authorization': 'Bearer ${auth}',});
+  //     log(response.body);
+  // }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -55,7 +80,7 @@ class DetailsScreen extends StatelessWidget {
                                         const SizedBox(width: 8.0),
                                         Expanded(
                                           child: Text(
-                                           projectno ?? "NA",
+                                           widget.projectno ?? "NA",
                                           style:GoogleFonts.poppins(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 14,
@@ -81,7 +106,7 @@ class DetailsScreen extends StatelessWidget {
                                         const SizedBox(width: 8.0),
                                         Expanded(
                                           child: Text(
-                                           portname ?? "NA",
+                                           widget.portname ?? "NA",
                                            style:GoogleFonts.poppins(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 14,
@@ -107,7 +132,7 @@ class DetailsScreen extends StatelessWidget {
                                         const SizedBox(width: 8.0),
                                         Expanded(
                                           child: Text(
-                                          type ?? "NA",
+                                          widget.type ?? "NA",
                                             style:GoogleFonts.poppins(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 14,
@@ -133,7 +158,7 @@ class DetailsScreen extends StatelessWidget {
                                         const SizedBox(width: 8.0),
                                         Expanded(
                                           child: Text(
-                                            vesselname ?? "NA",
+                                            widget.vesselname ?? "NA",
                                          style:GoogleFonts.poppins(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 14,
@@ -159,7 +184,7 @@ class DetailsScreen extends StatelessWidget {
                                         const SizedBox(width: 8.0),
                                         Expanded(
                                           child: Text(
-                                            customername ?? "NA",
+                                            widget.customername ?? "NA",
                                             style:GoogleFonts.poppins(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 14,

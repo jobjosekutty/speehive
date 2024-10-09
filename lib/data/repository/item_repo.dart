@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print, unnecessary_brace_in_string_interps
 
+import 'dart:developer';
+
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,6 +26,7 @@ class ItemRepoImpl extends ItemRepo {
       final response = await http.get(Uri.parse(AppUrl.ApiUrl),headers: {'Authorization': 'Bearer ${auth}',});
       if (response.statusCode == 200) { 
        final data = itemDetailsModelFromJson(response.body);
+       log(response.body);
        return Right(data);
       } else {
         return Left(handleStatusCode(response.statusCode, "error"));
