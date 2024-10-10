@@ -8,8 +8,10 @@ import 'package:speehive/core/app_color.dart';
 import 'package:speehive/presentation/screens/login.dart';
 
 
+import '../../core/app_constants.dart';
 import '../../di/get_it.dart';
 import '../provider/item_provider.dart';
+import '../widget/snack_bar.dart';
 import 'home.dart';
 
 class Dashboard extends StatelessWidget {
@@ -51,9 +53,10 @@ class Dashboard extends StatelessWidget {
                                               PopupMenuButton<String>(
                                                 icon: Icon(Icons.logout,color: Colors.white,),
             onSelected: (value) async{
-              // Handle menu item selection
+           
               if (value == 'Logout') {
-                  final SharedPreferences preferences = await SharedPreferences.getInstance();
+                      WidgetsBinding.instance.addPostFrameCallback((time)async{
+                                   final SharedPreferences preferences = await SharedPreferences.getInstance();
            preferences.setString("token","").then((value) {
             log("value is ${value}");
                   Navigator.pushReplacement(
@@ -61,12 +64,22 @@ class Dashboard extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) =>  LoginScreen()),
                           );
+                             scaffoldMessengerKey.currentState?.showSnackBar(
+              appSnackBar(
+                "Logout Success",
+                Colors.green,
+              ),
+            );
 
              
            },);
 
                 print("Logout selected");
+
+                      });
+       
               }
+            
             },
             itemBuilder: (BuildContext context) {
               return {'Logout'}.map((String choice) {

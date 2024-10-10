@@ -12,7 +12,6 @@ import '../../core/app_constants.dart';
 import '../../core/error_handler.dart';
 import '../../data/models/lookupmodel.dart';
 import '../widget/snack_bar.dart';
-import 'details_screen.dart';
 import 'package:lottie/lottie.dart';
 import "package:http/http.dart" as http;
 
@@ -29,6 +28,7 @@ class _HomeState extends State<Home> {
 
   bool lookuploading = false;
   LookUpModel?  data;
+    int selectedTile = -1;
    //final ExpansionTileController expantionTileController = ExpansionTileController();
 
    fetch(String id) async {
@@ -39,15 +39,12 @@ class _HomeState extends State<Home> {
 
 
      final SharedPreferences preferences = await SharedPreferences.getInstance();
-       var auth = preferences.getString("token");
-    
-      
+       var auth = preferences.getString("token");  
       final response = await http.get(Uri.parse("https://focali-uat.azurewebsites.net/api/app/projecttask/withOutDetails?filter=projectDetailId%20eq%20%22${id}%22&onlyActive=true&maxResultCount=500"),headers: {'Authorization': 'Bearer ${auth}',});
       log(response.body);
       if(response.statusCode ==200){
             data = lookUpModelFromJson(response.body);
-
-           print("======look${data?.items?.length}");
+    print("======look${data?.items?.length}");
      lookuploading = false;
      setState(() {
        
@@ -142,6 +139,7 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height,
                       child: ListView.builder(
+                             key: Key(selectedTile.toString()),
                         itemCount: value.details?.items.length,
                         itemBuilder: (context, index) {
                           final item = value.details?.items[index];
@@ -149,7 +147,7 @@ class _HomeState extends State<Home> {
                             padding: const EdgeInsets.only(bottom: 20),
                             child: GestureDetector(
                               onTap: () {
-
+     log("test");
                                 // Navigator.push(
                                 //   context,
                                 //   MaterialPageRoute(
@@ -172,11 +170,22 @@ class _HomeState extends State<Home> {
                                     borderRadius: BorderRadius.circular(10),
                                    border: Border.all(width: 2,color: Colors.white)
                                   ),
-                                child: ExpansionTile(   
+                                child: ExpansionTile(  
+                                    key: Key(index.toString()), 
+                                 initiallyExpanded: index == selectedTile,
                                //   controller: _controller,
-                                  onExpansionChanged: (value) {
-                                  print( item?.id.toString());
-                                  fetch(item!.id.toString());
+                                  onExpansionChanged: (newState) {
+                                    print(newState);
+                                    if(newState){
+                                               
+                                       setState(() {
+                selectedTile = newState ? index : -1;
+              });
+                                  fetch(item!.id.toString());                     
+                                     print( item?.id.toString());
+
+                                    } 
+                                 
                                   },
                                 
                                   title:  Column(
@@ -341,16 +350,16 @@ class _HomeState extends State<Home> {
                                     ],
                                   ),
                                    children: <Widget>[
-                                            Container(
-                                              height: 200, // Set the fixed height for scrollable content
+                                            SizedBox(
+                                              height: 200,
                                               child:  SingleChildScrollView(
                                                 child: Column(
                                                   children: [
                                                     SizedBox(
                                                       height: 200,
                                                       child:  lookuploading
-                                      ? Center(child: CircularProgressIndicator()) :
-                                      data?.totalCount == 0 ? Center(child: Text("No Data Found",style: TextStyle(color: Colors.white),))
+                                      ? const Center(child: CircularProgressIndicator()) :
+                                      data?.totalCount == 0 ? const Center(child: Text("No Data Found",style: TextStyle(color: Colors.white),))
                                       
                                           
                                       
@@ -360,8 +369,30 @@ class _HomeState extends State<Home> {
                                                         itemBuilder: (context, index) {
                                                       return 
                                                            ListTile(
-                                                        title: Text(data?.items?[index].taskItemName.toString()??'NA',style: TextStyle(color: Colors.white),),
-                                                      subtitle: Text(data?.items?[index].userProfileName.toString()??"NA",style: TextStyle(color: Colors.white),),
+                                                        title: Text(data?.items?[index].taskItemName.toString()??'NA',style: const TextStyle(color: Colors.white),),
+                                                      subtitle: Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              const Text("UserProfileName:",style: TextStyle(color: Colors.white),),
+                                                              Text(data?.items?[index].userProfileName.toString()??"NA",style: const TextStyle(color: Colors.white),),
+                                                            ],
+                                                          ),
+                                                            Row(
+                                                              children: [
+                                                                const Text("ProjectDetailsNo:",style: TextStyle(color: Colors.white),),
+                                                                Text(data?.items?[index].projectDetailProjectNo .toString()??"NA",style: const TextStyle(color: Colors.white),),
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                const Text("ID:",style: TextStyle(color: Colors.white),),
+                                                                Text(data?.items?[index].id .toString()??"NA",style: const TextStyle(color: Colors.white),),
+                                                              ],
+                                                            ),
+                                                        ],
+                                                      ),
                                                       );
                                                         
                                                       },),
