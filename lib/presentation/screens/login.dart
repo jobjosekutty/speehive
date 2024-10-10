@@ -131,6 +131,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       setHeight(16),
                       TextFormField(
+                        
                         focusNode: passwordFocusNode,
                         controller: passwordController,
                         validator: (value) {
@@ -141,8 +142,11 @@ class LoginScreen extends StatelessWidget {
                           return null;
                         },
                         textInputAction: TextInputAction.done,
-                        obscureText: true,
+                        obscureText:  Provider.of<LoginProvider>(context, listen: false).isObscure,
                         decoration: InputDecoration(
+                          suffixIcon: IconButton(onPressed: (){
+                                 Provider.of<LoginProvider>(context, listen: false).visibility();
+                          }, icon: const Icon(Icons.visibility)),
                           floatingLabelStyle: GoogleFonts.poppins(
                             color: AppColors.primarycolor,
                           ),

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously, unnecessary_brace_in_string_interps, avoid_print
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -51,7 +53,7 @@ class Dashboard extends StatelessWidget {
                                             
                                           ),),centerTitle: true,actions: [
                                               PopupMenuButton<String>(
-                                                icon: Icon(Icons.logout,color: Colors.white,),
+                                                icon: const Icon(Icons.logout,color: Colors.white,),
             onSelected: (value) async{
            
               if (value == 'Logout') {

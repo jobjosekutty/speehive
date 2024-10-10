@@ -15,6 +15,7 @@ class LoginProvider extends ChangeNotifier {
   LoginProvider({required LoginRepo loginRepo}) : _loginRepo = loginRepo;
 
   bool _isLoading = false;
+   bool isObscure = true;
   bool get isLoading => _isLoading;
   set setLoading(bool value) {
     _isLoading = value;
@@ -28,6 +29,7 @@ class LoginProvider extends ChangeNotifier {
     _failure = value;
     notifyListeners();
   }
+
 
   bool loginSucess = false;
 
@@ -51,6 +53,13 @@ class LoginProvider extends ChangeNotifier {
      notifyListeners();
       setLoading = false;
     });
+  }
+
+  visibility(){
+
+                        isObscure = !isObscure;
+                        notifyListeners();
+                 
   }
 
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables, avoid_print
+
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
@@ -40,7 +42,7 @@ class _HomeState extends State<Home> {
 
      final SharedPreferences preferences = await SharedPreferences.getInstance();
        var auth = preferences.getString("token");  
-      final response = await http.get(Uri.parse("https://focali-uat.azurewebsites.net/api/app/projecttask/withOutDetails?filter=projectDetailId%20eq%20%22${id}%22&onlyActive=true&maxResultCount=500"),headers: {'Authorization': 'Bearer ${auth}',});
+      final response = await http.get(Uri.parse("https://focali-uat.azurewebsites.net/api/app/projecttask/withOutDetails?filter=projectDetailId%20eq%20%22$id%22&onlyActive=true&maxResultCount=500"),headers: {'Authorization': 'Bearer $auth',});
       log(response.body);
       if(response.statusCode ==200){
             data = lookUpModelFromJson(response.body);
@@ -182,7 +184,7 @@ class _HomeState extends State<Home> {
                 selectedTile = newState ? index : -1;
               });
                                   fetch(item!.id.toString());                     
-                                     print( item?.id.toString());
+                                     print( item.id.toString());
 
                                     } 
                                  
