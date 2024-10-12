@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -173,207 +174,236 @@ class _HomeState extends State<Home> {
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(width: 2, color: Colors.white),
                           ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Row(
                             children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    "ProjectNo:",
-                                    style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 14,
-                                      color: Colors.white,
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "ProjectNo:",
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8.0),
+                                        Expanded(
+                                          child: Text(
+                                            item?.projectNo ?? "NA",
+                                            style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  const SizedBox(width: 8.0),
-                                  Expanded(
-                                    child: Text(
-                                      item?.projectNo ?? "NA",
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "PortName:",
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8.0),
+                                        Expanded(
+                                          child: Text(
+                                            item?.portName ?? "NA",
+                                            style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "PortName:",
-                                    style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 14,
-                                      color: Colors.white,
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "TypeOfCallName:",
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8.0),
+                                        Expanded(
+                                          child: Text(
+                                            item?.typeOfCallName ?? "NA",
+                                            style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  const SizedBox(width: 8.0),
-                                  Expanded(
-                                    child: Text(
-                                      item?.portName ?? "NA",
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Vessel Name:",
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8.0),
+                                        Expanded(
+                                          child: Text(
+                                            item?.vesselName ?? "NA",
+                                            style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "TypeOfCallName:",
-                                    style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 14,
-                                      color: Colors.white,
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "CustomerName:",
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8.0),
+                                        Expanded(
+                                          child: Text(
+                                            item?.customerName ?? "NA",
+                                            style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  const SizedBox(width: 8.0),
-                                  Expanded(
-                                    child: Text(
-                                      item?.typeOfCallName ?? "NA",
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "ProjectportCalleta:",
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8.0),
+                                        Expanded(
+                                          child: Text(
+                                            item?.projectPortCallEta.toString() ?? "NA",
+                                            style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "Vessel Name:",
-                                    style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 8.0),
-                                  Expanded(
-                                    child: Text(
-                                      item?.vesselName ?? "NA",
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "CustomerName:",
-                                    style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 8.0),
-                                  Expanded(
-                                    child: Text(
-                                      item?.customerName ?? "NA",
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "ProjectportCalleta:",
-                                    style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 8.0),
-                                  Expanded(
-                                    child: Text(
-                                      item?.projectPortCallEta.toString() ?? "NA",
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              if (isExpanded) ...[
-                                const SizedBox(height: 20),
-                                   SizedBox(
-                                              height: 200,
-                                              child:  SingleChildScrollView(
-                                                child: Column(
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 200,
-                                                      child:  lookuploading
-                                      ? const Center(child: CircularProgressIndicator()) :
-                                      data?.totalCount == 0 ? const Center(child: Text("No Data Found",style: TextStyle(color: Colors.white),))
-                                      
-                                          
-                                      
-                                                    :     ListView.builder(
-                                                        itemCount: data?.items?.length
-                                                        ,
-                                                        itemBuilder: (context, index) {
-                                                      return 
-                                                           ListTile(
-                                                        title: Text(data?.items?[index].taskItemName.toString()??'NA',style: const TextStyle(color: Colors.white),),
-                                                      subtitle: Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                    if (isExpanded) ...[
+                                      const SizedBox(height: 20),
+                                         SizedBox(
+                                                    height: 200,
+                                                    child:  SingleChildScrollView(
+                                                      child: Column(
                                                         children: [
-                                                          Row(
-                                                            children: [
-                                                              const Text("UserProfileName:",style: TextStyle(color: Colors.white),),
-                                                              Text(data?.items?[index].userProfileName.toString()??"NA",style: const TextStyle(color: Colors.white),),
-                                                            ],
-                                                          ),
-                                                            Row(
-                                                              children: [
-                                                                const Text("ProjectDetailsNo:",style: TextStyle(color: Colors.white),),
-                                                                Text(data?.items?[index].projectDetailProjectNo .toString()??"NA",style: const TextStyle(color: Colors.white),),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              children: [
-                                                                const Text("ID:",style: TextStyle(color: Colors.white),),
-                                                                Text(data?.items?[index].id .toString()??"NA",style: const TextStyle(color: Colors.white),),
-                                                              ],
-                                                            ),
+                                                          SizedBox(
+                                                            height: 200,
+                                                            child:  lookuploading
+                                            ? const Center(child: CircularProgressIndicator()) :
+                                            data?.totalCount == 0 ? const Center(child: Text("No Data Found",style: TextStyle(color: Colors.white),))
+                                            
+                                                
+                                            
+                                                          :     ListView.builder(
+                                                              itemCount: data?.items?.length
+                                                              ,
+                                                              itemBuilder: (context, index) {
+                                                            return 
+                                                                 Container(
+                                                                  margin: const EdgeInsets.only(top: 5),
+                                                               
+                                                                  decoration: BoxDecoration(   color: Colors.grey[600],borderRadius: BorderRadius.circular(6)),
+                                                                   child: ListTile(
+                                                                                                                           title: Text(data?.items?[index].taskItemName.toString()??'NA',style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
+                                                                                                                         subtitle: Column(
+                                                                                                                           crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                                           children: [
+                                                                                                                             Row(
+                                                                    children: [
+                                                                      Icon(Icons.person,color: Colors.white,),
+                                                                      setWidth(8),
+                                                                      const Text("UserProfileName:",style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
+                                                                      Text(data?.items?[index].userProfileName.toString()??"NA",style: const TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),),
+                                                                    ],
+                                                                                                                             ),
+                                                                    Row(
+                                                                      children: [
+                                                                            const Icon(Icons.task,color: Colors.white,),
+                                                                            setWidth(8),
+                                                                        const Text("ProjectDetailsNo:",style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
+                                                                        Text(data?.items?[index].projectDetailProjectNo .toString()??"NA",style: const TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),),
+                                                                      ],
+                                                                    ),
+                                                                    Row(
+                                                                      children: [
+                                                                            const Icon(Icons.card_membership,color: Colors.white,),
+                                                                            setWidth(8),
+                                                                        const Text("ID:",style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
+                                                                        Expanded(child: Text(data?.items?[index].id .toString()??"NA",style: const TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),overflow: TextOverflow.ellipsis,)),
+                                                                      ],
+                                                                    ),
+                                                                                                                           ],
+                                                                                                                         ),
+                                                                                                                         ),
+                                                                 );
+                                                              
+                                                            },),
+                                                          )
                                                         ],
                                                       ),
-                                                      );
-                                                        
-                                                      },),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                              ],
+                                                    ),
+                                                  ),
+                                    ],
+                                  ],
+                                ),
+                              ),
+                      isExpanded?Container():        IconButton(onPressed: ()async{
+                                   if (isExpanded) {
+                            setState(() {
+                              expandedIndex = null;
+                            });
+                          } else {
+                            setState(() {
+                              expandedIndex = index;
+                            });
+                          await fetch(item!.id);
+                          }
+                              }, icon: Icon(Icons.arrow_downward))
                             ],
                           ),
                         ),
